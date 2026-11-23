@@ -58,9 +58,9 @@ class TestChain1SourceToExtractToBatch:
         result = svc.confirm_register(entry["id"])
         assert "error" not in result
         triggers = result.get("auto_triggers", {})
-        # 确认自动创建了抽取窗口
+        # 确认自动创建了抽取窗口（清单首窗物化后为待抽取）
         if "extract_window" in triggers and "error" not in str(triggers["extract_window"]):
-            assert triggers["extract_window"]["status"] == "草稿"
+            assert triggers["extract_window"]["status"] == "待抽取"
         # 确认自动创建了字段契约
         if "field_contract" in triggers and "error" not in str(triggers["field_contract"]):
             assert triggers["field_contract"]["status"] == "已生效"
